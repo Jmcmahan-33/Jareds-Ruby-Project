@@ -6,17 +6,34 @@ class ApplicationController < Sinatra::Base
   # end
 
   # TEACHERS CRUD
-   #  Read 
+   #  READ 
   get '/teachers' do
     # get all the teachers from the database
     teachers = Teacher.all
     # return a JSON response with an array of all the teachers data
     teachers.to_json
   end
+    # CREATE
+  post '/teachers' do
+    teacher = Teacher.create(name: params[:name], instrument: params[:instrument], availability: params[:availability], rate: params[:rate])
+    teacher.to_json
+  end
+
+  # UPDATE
+
+   # DELETE 
+   delete "/teachers/:id" do
+    teacher = Teacher.find(params[:id])
+    teacher.destroy
+    teacher.to_json
+  end
+
+
+
 
 
   # STUDENTS CRUD
-    # Read
+    # READ
   get '/students' do
     # get all the students from the database
     students = Student.all
@@ -24,7 +41,7 @@ class ApplicationController < Sinatra::Base
     students.to_json
   end
 
-  # Add new Student
+    # CREATE
   post '/students' do
     student = Student.create(name: params[:name], instrument: params[:instrument], comment: params[:comment],teacher_id: params[:teacher_id])
     student.to_json
