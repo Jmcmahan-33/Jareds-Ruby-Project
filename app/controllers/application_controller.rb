@@ -5,6 +5,29 @@ class ApplicationController < Sinatra::Base
   #   { students: "Good luck with your project!" }.to_json
   # end
 
+  # COMMENTS CRUD
+  get '/comments' do
+    # get all the teachers from the database
+    comments = Comment.all
+    # return a JSON response with an array of all the comments data
+    comments.to_json
+  end
+    # CREATE
+  post '/comments' do
+    comment = Comment.create(body: params[:body], student_id: params[:student_id], teacher_id: params[:teacher_id])
+    comment.to_json
+  end
+
+  # UPDATE
+
+   # DELETE 
+   delete "/comments/:id" do
+    comment = Comment.find(params[:id])
+    comment.destroy
+    comment.to_json
+  end
+
+
   # TEACHERS CRUD
    #  READ 
   get '/teachers' do
