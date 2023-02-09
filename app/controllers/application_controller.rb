@@ -26,8 +26,9 @@ class ApplicationController < Sinatra::Base
 
     # update the comment in the database
     comment.update(
-      score: params[:score],
-      comment: params[:comment]
+      body: params[:body],
+      student_id: params[:student_id],
+      teacher_id: params[:teacher_id],
     )
 
     # send back the updated comment as JSON
