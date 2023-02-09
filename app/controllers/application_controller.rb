@@ -6,6 +6,7 @@ class ApplicationController < Sinatra::Base
   # end
 
   # COMMENTS CRUD
+    # READ 
   get '/comments' do
     # get all the teachers from the database
     comments = Comment.all
@@ -19,6 +20,20 @@ class ApplicationController < Sinatra::Base
   end
 
   # UPDATE
+  patch '/comments/:id' do
+    # find the comment using the ID
+    comment = Comment.find(params[:id])
+
+    # update the comment in the database
+    comment.update(
+      score: params[:score],
+      comment: params[:comment]
+    )
+
+    # send back the updated comment as JSON
+    comment.to_json
+  end
+
 
    # DELETE 
    delete "/comments/:id" do
