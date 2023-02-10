@@ -89,6 +89,18 @@ class ApplicationController < Sinatra::Base
   end
 
   # UPDATE
+  # patch '/students/:id' do
+  #   # find the comment using the ID
+  #   comment = Comment.find_by(id: params[:id])
+
+  #   # update the comment in the database
+  #   comment.update(
+  #     body: params[:body],
+  #     student_id: params[:student_id],
+  #     teacher_id: params[:teacher_id],
+  #   )
+  # end
+
 
   # DELETE 
   delete "/students/:id" do
