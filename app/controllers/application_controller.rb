@@ -43,8 +43,6 @@ class ApplicationController < Sinatra::Base
     comment.to_json
   end
 
-  
-
 
   # TEACHERS CRUD
    #  READ 
@@ -60,12 +58,6 @@ class ApplicationController < Sinatra::Base
     teacher.to_json
   end
 
- 
-
-
-
-
-
   # STUDENTS CRUD
     # READ
   get '/students' do
@@ -80,26 +72,4 @@ class ApplicationController < Sinatra::Base
     student = Student.create(name: params[:name], instrument: params[:instrument], comment: params[:comment],teacher_id: params[:teacher_id])
     student.to_json
   end
-
-  # UPDATE
-  # patch '/students/:id' do
-  #   # find the comment using the ID
-  #   comment = Comment.find_by(id: params[:id])
-
-  #   # update the comment in the database
-  #   comment.update(
-  #     body: params[:body],
-  #     student_id: params[:student_id],
-  #     teacher_id: params[:teacher_id],
-  #   )
-  # end
-
-
-  # DELETE 
-  delete "/students/:id" do
-    student = Student.find(params[:id])
-    student.destroy
-    student.to_json
-  end
-
 end
