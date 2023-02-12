@@ -67,7 +67,7 @@ class ApplicationController < Sinatra::Base
 
     # CREATE
   post '/students' do
-    student = Student.create(name: params[:name], instrument: params[:instrument], comment: params[:comment],teacher_id: params[:teacher_id])
+    student = Student.create(name: params[:name], instrument: params[:instrument], teacher_id: params[:teacher_id])
     student.to_json
   end
 end
