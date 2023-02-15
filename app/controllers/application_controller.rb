@@ -13,9 +13,12 @@ class ApplicationController < Sinatra::Base
   end
     # CREATE
   post '/comments' do
+    student = Student.find_by(id: params[:id])
     comment = Comment.create(body: params[:body], student_id: params[:student_id], teacher_id: params[:teacher_id])
     comment.to_json
   end
+
+
 
   # UPDATE
   patch '/comments/:id' do
