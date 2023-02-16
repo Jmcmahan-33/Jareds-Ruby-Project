@@ -30,6 +30,14 @@ class ApplicationController < Sinatra::Base
  
     # UPDATE 
       # Possible update of the instrument. 
+      patch '/students/:id' do
+        student = Student.find(params[:id])
+        student.update(
+          instrument: params[:instrument],
+         
+        )
+        student.to_json
+      end
     # DELETE 
      delete "/students/:id" do
     student = Student.find(params[:id])
