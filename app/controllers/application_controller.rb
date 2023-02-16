@@ -23,10 +23,11 @@ class ApplicationController < Sinatra::Base
     # CREATE
   
   post '/students' do
-    teacher = Teacher.find_by(id: params[:teacher_id])
-    student = teacher.students.create(params)
+    student = Student.create(name: params[:name], instrument: params[:instrument], teacher_id: params[:teacher_id])
     student.to_json
   end
+
+ 
     # UPDATE 
       # Possible update of the instrument. 
     # DELETE 
@@ -36,6 +37,11 @@ class ApplicationController < Sinatra::Base
     student.to_json
   end
 end
+
+
+
+
+
 
 
 

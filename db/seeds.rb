@@ -9,25 +9,3 @@ puts "🌱 Seeding spices..."
 puts "✅ Done seeding!"
 
 
-# post '/reviews' do
-#     # review = Review.create(params) (don’t add this line) 
-#     workspace = Workspace.find_by(id: params[:workspace_id])
-#     review = workspace.reviews.create(params)
-#     review.to_json
-#   end
-# post '/students' do
-#     teacher = Teacher.find_by(id: params[:teacher_id])
-#     student = teacher.students.create(params)
-#     student.to_json
-#   end
-
-
-# 	post "/reviews" do 
-#         review = Review.create(
-#           review: params[:review].capitalize(), rating: params[:rating], 
-#           company_name: params[:company_name].capitalize(), 
-#           restuarant_id: Restuarant.find_by(name: params[:company_name].capitalize()).id
-#         )
-#           review.to_json(include: :restuarant)    
-#     end
-    
