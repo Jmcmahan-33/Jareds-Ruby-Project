@@ -21,8 +21,10 @@ class ApplicationController < Sinatra::Base
     students.to_json
   end
     # CREATE
+  
   post '/students' do
-    student = Student.create(name: params[:name], instrument: params[:instrument], teacher_id: params[:teacher_id])
+    teacher = Teacher.find_by(id: params[:teacher_id])
+    student = teacher.students.create(params)
     student.to_json
   end
     # UPDATE 
