@@ -33,6 +33,7 @@ class ApplicationController < Sinatra::Base
       patch '/students/:id' do
         student = Student.find(params[:id])
         student.update(
+          name: params[:name],
           instrument: params[:instrument],
          
         )
