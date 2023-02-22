@@ -4,6 +4,8 @@ class ApplicationController < Sinatra::Base
   # before table drop 
   # TEACHERS CRUD
    #  READ 
+
+  #  possible include method for teachers.to_json
   get '/teachers' do
     teachers = Teacher.all
     teachers.to_json
@@ -22,6 +24,11 @@ class ApplicationController < Sinatra::Base
     students.to_json
   end
     # CREATE
+    # possible refactor, talk to Enoch about post
+    # create a student through teacher 
+      # finding a teacher through the teacher
+      # then go with line 31, the create
+      # make a variable equal to find_by teacher id. 
   
   post '/students' do
     student = Student.create(name: params[:name], instrument: params[:instrument], teacher_id: params[:teacher_id])
