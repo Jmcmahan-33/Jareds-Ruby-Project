@@ -8,12 +8,12 @@ class ApplicationController < Sinatra::Base
   #  possible include method for teachers.to_json
   get '/teachers' do
     teachers = Teacher.all
-    teachers.to_json
+    teachers.to_json(include: :students)
   end
     # CREATE
   post '/teachers' do
     teacher = Teacher.create(name: params[:name], musical_talents: params[:musical_talents], rate: params[:rate])
-    teacher.to_json
+    teacher.to_json(include: :students)
   end
 
 
@@ -21,7 +21,7 @@ class ApplicationController < Sinatra::Base
     # READ
   get '/students' do
     students = Student.all
-    students.to_json
+    students.to_json(include: :teacher)
   end
     # CREATE
     # possible refactor, talk to Enoch about post
@@ -32,7 +32,7 @@ class ApplicationController < Sinatra::Base
   
   post '/students' do
     student = Student.create(name: params[:name], instrument: params[:instrument], teacher_id: params[:teacher_id])
-    student.to_json
+    student.to_json(include: :teacher)
   end
 
  
@@ -45,13 +45,13 @@ class ApplicationController < Sinatra::Base
           instrument: params[:instrument],
          
         )
-        student.to_json
+        student.to_json(include: :teacher)
       end
     # DELETE 
      delete "/students/:id" do
     student = Student.find(params[:id])
     student.destroy
-    student.to_json
+    student.to_json(include: :teacher)
   end
 end
 

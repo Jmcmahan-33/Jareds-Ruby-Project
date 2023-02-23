@@ -1,4 +1,7 @@
 class Student < ActiveRecord::Base
     belongs_to :teacher
-    has_many :comments
+    
+    def get_teacher_name
+        self.teacher.name
+      end
 end
