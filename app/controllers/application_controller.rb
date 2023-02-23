@@ -62,38 +62,3 @@ end
 
 
 
-
-  # COMMENTS CRUD
-    # READ 
-  # get '/comments' do
-  #   # get all the teachers from the database
-  #   comments = Comment.all
-  #   # return a JSON response with an array of all the comments data
-  #   comments.to_json
-  # end
-  #   # CREATE
-  # post '/comments' do
-  #   student = Student.find_by(id: params[:id])
-  #   comment = Comment.create(body: params[:body], student_id: params[:student_id], teacher_id: params[:teacher_id])
-  #   comment.to_json
-  # end
-  # # UPDATE
-  # patch '/comments/:id' do
-  #   # find the comment using the ID
-  #   comment = Comment.find(params[:id])
-
-  #   # update the comment in the database
-  #   comment.update(
-  #     body: params[:body],
-  #     student_id: params[:student_id],
-  #     teacher_id: params[:teacher_id],
-  #   )
-  #   # send back the updated comment as JSON
-  #   comment.to_json
-  # end
-  #  # DELETE 
-  #  delete "/comments/:id" do
-  #   comment = Comment.find(params[:id])
-  #   comment.destroy
-  #   comment.to_json
-  # end
