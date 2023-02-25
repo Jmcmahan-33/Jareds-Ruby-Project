@@ -1,134 +1,88 @@
-# Phase 3 Project Guidelines
+# J-Rock Music Lessons Backend
 
-## Learning Goals
 
-- Build a web basic API with Sinatra and Active Record to support a React
-  frontend
+## Description
 
-## Introduction
+The J-Rock Music Lessons is an App that allows students to sign up for music lessons. During sign up the student can pick which teacher they want to conduct lessons with. Fortunately, our teachers are multi talented Rock musicians, so if the student changes their mind on what Intrument they want to play, they have the ability to do so while keeping the same teacher for the Semester. Since the school is a ever growing business, the app has the ability to hire new teachers. Everytime a student signs up, they will have the ability to pick the  hired teachers. Lastly, if the student wants to cancel lessons, they can go ahead and delete themselves from the student page. 
 
-Congrats on getting through all the material for Phase 3! Now's the time to put
-it all together and build something from scratch to reinforce what you know and
-expand your horizons.
+## Installation
+In the terminal create a new directory with new file name. Once you are in the file of the new directory, you can fork and clone from the following: https://github.com/learn-co-curriculum/phase-3-sinatra-react-project/fork.
+Install steps:
+  - Grab SSH Key from the forked github repository.
+  - In your Backend directory file, run the command: "git clone" (SSH KEY)
+  - After that, run the command to install the Ruby gems: "bundle install" 
+  - To view the backend has successfully installed, run command: "bundle exec rake server"
+  - Go to browser and type the following: http://localhost:9292.
+  - To test, create a Get Route in the back end application controller http://localhost:9292/teachers.
+  - Then on the front end, create a fetch request: fetch("http://localhost:9292/teachers").
+  -Go to console and see the teachers data. 
 
-The focus of this project is **building a Sinatra API backend** that uses
-**Active Record** to access and persist data in a database, which will be used
-by a separate **React frontend** that interacts with the database via the API.
 
-## Requirements
 
-For this project, you must:
 
-- Use Active Record to interact with a database.
-- Have at least two models with a one-to-many relationship.
-- At a minimum, set up the following API routes in Sinatra:
-  - create and read actions for both models
-  - full CRUD capability for one of the models
-- Build a separate React frontend application that interacts with the API to
-  perform CRUD actions.
-- Implement proper front end state management. You should be updating state using a
-  setState function after receiving your response from a POST, PATCH, or DELETE 
-  request. You should NOT be relying on a GET request to update state. 
-- Use good OO design patterns. You should have separate classes for each of your
-  models, and create instance and class methods as necessary. 
-- Routes in your application (both client side and back end) should follow RESTful
-  conventions.
-- Use your back end optimally. Pass JSON for related associations to the front 
-  end from the back end. You should use active record methods in your controller to grab
-  the needed data from your database and provide as JSON to the front end. You
-  should NOT be relying on filtering front end state or a separate fetch request to
-  retrieve related data.
 
-For example, build a todo list application with a React frontend interface and a
-Sinatra backend API, where a user can:
 
-- **Create** a new todo
-- **Read** a list of all todos
-- **Update** an individual todo
-- **Delete** a todo
+## Project Startup:
 
-A `Todo` can be tagged with a `Category`, so that each todo _belongs to_ a
-category and each category _has many_ todos.
+### Start App
+In the project directory located at "phase-3-project", cd into "phase-3-sinatra-react-project"
+  then run the following command: "bundle exec rake server" 
+  This will fire up port http://localhost:9292/
 
-## Getting Started
+  *SIDE NOTE: Need to run "npm start" on the front end for App to work properly. 
 
-### Backend Setup
 
-This repository has all the starter code needed to get a Sinatra backend up and
-running. [**Fork and clone**][fork link] this repository to get started. Then, run
-`bundle install` to install the gems.
+## Usage  
 
-**Important**: Be sure you fork a copy of the repo into your GitHub account
-before cloning it. You can do this by using the link above or by clicking the
-"Octocat" button at the top of this page, then clicking "Fork" in the upper
-right corner of the repo page.
+Add  db.json file to create your own json-server with an array of objects and key/pairs. 
+Two models using CRUD
+Teachers:
+* GET Request: "http://localhost:9292/teachers"  
+* POST Request: "http://localhost:9292/teachers"  
 
-[fork link]: https://github.com/learn-co-curriculum/phase-3-sinatra-react-project/fork
+Students (FULL CRUD)
+* GET Request: "http://localhost:9292/students" 
+* POST Request: "http://localhost:9292/students"  
+* PATCH Request: "http://localhost:9292/students/${student.id}"  
+* DELETE Request: "http://localhost:9292/students/${student.id}"  
 
-The `app/controllers/application_controller.rb` file has an example GET route
-handler. Replace this route with routes for your project.
+## Migration Usage
+ * Commands:  
+ rake db:create_migration NAME=create_students_table  
+ rake db:migrate
 
-You can start your server with:
+ ## Tables and Assocations
+ * Relationship: Student belongs to Teacher
+ * Relationship: Teacher has many students
+ * Foreign Key: teacher_id on students table 
 
-```console
-$ bundle exec rake server
-```
+ * class CreateStudents < ActiveRecord::Migration[6.1]  
+ def change  
+ create_table :students do |t|  
+ t.string :name  
+ t.string :instrument  
+ t.integer :teacher_id  
+ t.timestamps  
+ end
 
-This will run your server on port
-[http://localhost:9292](http://localhost:9292).
+* class CreateTeachers < ActiveRecord::Migration[6.1]  
+def change  
+create_table :teachers do |t|  
+t.string :name  
+t.string :instrument  
+t.integer :rate  
+t.timestamps  
+end
 
-### Frontend Setup
+  
 
-Your backend and your frontend should be in **two different repositories**.
+ 
 
-Create a new repository in a **separate folder** with a React app for your
-frontend. To do this, `cd` out of the backend project directory, and use
-[create-react-app][] to generate the necessary code for your React frontend:
 
-```console
-$ npx create-react-app my-app-frontend
-```
 
-After creating the project locally, you should also
-[create a repository on GitHub][create repo] to host your repo and help
-collaborate, if you're working with a partner.
+## ToDo's  
+* Route to display students when clicking on certain teacher ID 
+* Fix bugs 
+* Add Join Table Comments
 
-### Fetch Example
 
-Your React app should make fetch requests to your Sinatra backend! Here's an
-example:
-
-```js
-fetch("http://localhost:9292/test")
-  .then((r) => r.json())
-  .then((data) => console.log(data));
-```
-
-## Project Tips
-
-- This project is intended to focus more on the backend than the frontend, so
-  try and keep the React side of things relatively simple. Focus on working with
-  Active Record and performing CRUD actions. What are some interesting queries you can write? What kinds of questions can you ask of your data?
-- Once you have a project idea, come up with a domain model and decide what
-  relationships exist between the models in your application. Use a tool like
-  [dbdiagram.io][] to help visualize your models.
-- Decide on your API endpoints. What data should they return? What kind of CRUD
-  action should they perform? What data do they need from the client?
-- Use [Postman][postman download] to test your endpoints.
-- Use `binding.pry` to debug your requests on the server. It's very helpful to use a
-  `binding.pry` in your controller within a route to see what `params` are being
-  sent.
-- Use the [Network Tab in the Dev Tools][network tab] in the frontend to debug
-  your requests.
-
-## Resources
-
-- [create-react-app][]
-- [dbdiagram.io][]
-- [Postman][postman download]
-
-[create-react-app]: https://create-react-app.dev/docs/getting-started
-[create repo]: https://docs.github.com/en/get-started/quickstart/create-a-repo
-[dbdiagram.io]: https://dbdiagram.io/
-[postman download]: https://www.postman.com/downloads/
-[network tab]: https://developer.chrome.com/docs/devtools/network/
