@@ -11,6 +11,13 @@ class ApplicationController < Sinatra::Base
     teacher.to_json(include: :students)
   end
 
+  get '/teachers/:id' do
+    # look up the teacher in the database using its ID
+    teacher = Teacher.find(params[:id])
+    # send a JSON-formatted response of the teacher data
+    teacher.to_json(include: :students)
+  end
+
   
   get '/students' do
     students = Student.all
